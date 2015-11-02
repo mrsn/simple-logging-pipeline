@@ -6,10 +6,10 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "logstash" do |logstash|
-    logstash.vm.box = "opscode_centos-7.1_chef-provisionerless"
-    logstash.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_centos-7.1_chef-provisionerless.box"
+    logstash.vm.box = "opscode_ubuntu-14.04_chef-provisionerless"
+    logstash.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-14.04_chef-provisionerless.box"
     logstash.omnibus.chef_version = :latest
-    logstash.vm.network :private_network, ip: "192.168.33.10"
+    logstash.vm.network :private_network, ip: "192.168.33.50"
 
     logstash.vm.provider :virtualbox do |vb|
       vb.customize ["modifyvm", :id, "--memory", "512"]
@@ -28,10 +28,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.define "graphite" do |graphite|
-    graphite.vm.box = "opscode_centos-7.1_chef-provisionerless"
-    graphite.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_centos-7.1_chef-provisionerless.box"
+    graphite.vm.box = "opscode_ubuntu-14.04_chef-provisionerless"
+    graphite.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-14.04_chef-provisionerless.box"
     graphite.omnibus.chef_version = :latest
-    graphite.vm.network :private_network, ip: "192.168.33.11"
+    graphite.vm.network :private_network, ip: "192.168.33.51"
 
     graphite.vm.provider :virtualbox do |vb|
       vb.customize ["modifyvm", :id, "--memory", "512"]
