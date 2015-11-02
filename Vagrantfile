@@ -15,16 +15,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       vb.customize ["modifyvm", :id, "--memory", "512"]
     end
 
-    #logstash.vm.provision :chef_solo do |chef|
-    #  chef.cookbooks_path = "../../cookbooks"
+    logstash.vm.provision :chef_solo do |chef|
+      chef.cookbooks_path = "cookbooks"
+      chef.add_recipe "apt"
+      chef.add_recipe "java::openjdk"
+      chef.add_recipe "logstash"
     #  chef.data_bags_path = "../../data_bags"
-    #  chef.log_level = :debug
-    #  chef.add_recipe "cron"
-    #  chef.add_recipe "backup-cookbook"
-    #  chef.add_recipe "backup-cookbook::model"
-    #  chef.add_recipe "deps"
-    #  chef.add_recipe "zabbix::agent"
-    #end
+    end
   end
 
   config.vm.define "graphite" do |graphite|
