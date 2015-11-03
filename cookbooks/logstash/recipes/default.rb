@@ -22,3 +22,13 @@ package 'logstash' do
   action :install
   version '1:2.0.0-1'
 end
+
+service 'logstash' do
+  supports :status => true, :restart => true, :reload => true
+  action [:enable, :start]
+end
+
+template '/etc/logstash/conf.d/logstash-simple.conf' do
+  source 'conf/logstash-simple.erb'
+  notifies :restart, 'service[logstash]', :immediately
+end
