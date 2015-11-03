@@ -20,4 +20,5 @@ execute 'apt-get update'
 
 package 'logstash' do
   action :install
+  version '1:2.0.0-1'
 end
