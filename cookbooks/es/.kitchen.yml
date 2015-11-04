@@ -1,0 +1,22 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: ubuntu-14.04
+    driver_config:
+      require_chef_omnibus: true
+      use_vagrant_berkshelf_plugin: true
+
+suites:
+  - name: default
+    run_list:
+      - recipe[es::default]
+    attributes: { es: { cluster_name: 'foo' } }
+  - name: plugins
+    run_list:
+      - recipe[es::default]
+      - recipe[es::plugins]

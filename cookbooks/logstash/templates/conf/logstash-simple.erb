@@ -1,0 +1,15 @@
+input {
+  file {
+    path => "/var/log/messages"
+    type => "syslog"
+  }
+
+  file {
+    path => "/var/log/apache/access.log"
+    type => "apache"
+  }
+}
+
+output {
+  stdout { codec => json }
+}

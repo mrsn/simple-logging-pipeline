@@ -1,6 +1,6 @@
 name 'java'
-maintainer 'The Authors'
-maintainer_email 'you@example.com'
+maintainer 'Stoyan Stoyanov'
+maintainer_email 'stoyanoff.s@gmail.com'
 license 'all_rights'
 description 'Installs/Configures java'
 long_description 'Installs/Configures java'

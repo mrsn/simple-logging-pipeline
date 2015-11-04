@@ -1,9 +1,7 @@
 require 'spec_helper'
 
 describe 'logstash::default' do
-  # Serverspec examples can be found at
-  # http://serverspec.org/resource_types.html
-  it 'does something' do
-    skip 'Replace this with meaningful tests'
+  describe 'service logstash' do
+    it { expect(service('logstash')).to be_running }
   end
 end
