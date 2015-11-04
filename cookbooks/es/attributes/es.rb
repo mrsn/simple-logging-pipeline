@@ -1,5 +1,5 @@
 default['es']['cluster_name'] = 'myprettycluster'
-default['es']['version'] = '1.5.1'
+default['es']['version'] = '2.0.0'
 default['es']['name'] = 'elasticsearch'
 default['es']['deb_file'] = "#{node['es']['name']}" \
 "-#{node['es']['version']}.deb"
