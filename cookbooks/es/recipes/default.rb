@@ -27,14 +27,13 @@ end
 template '/etc/elasticsearch/elasticsearch.yml' do
   source 'elasticsearch.yml.erb'
   owner 'root'
-  group 'root'
-  mode 0644
+  group 'elasticsearch'
+  mode 0640
   variables(
     cluster_name: node['es']['cluster_name']
   )
+  notifies :restart, 'service[elasticsearch]', :immediately 
 end
-
-include_recipe 'es::plugins'
 
 service 'elasticsearch' do
   action [:enable, :start]

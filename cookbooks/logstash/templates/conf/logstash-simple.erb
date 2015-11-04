@@ -1,16 +1,6 @@
-input {
-  file {
-    path => "/var/log/messages"
-    type => "syslog"
-  }
-
-  file {
-    path => "/var/log/apache2/access.log"
-    type => "apache"
-  }
-}
+input { stdin { } }
 
 output {
-  stdout { codec => json }
   elasticsearch { hosts => ["192.168.33.51:9200"] }
+  stdout { codec => rubydebug }
 }

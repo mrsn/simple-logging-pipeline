@@ -19,4 +19,3 @@ suites:
   - name: plugins
     run_list:
       - recipe[es::default]
-      - recipe[es::plugins]
