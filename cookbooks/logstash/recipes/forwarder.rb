@@ -1,9 +1,12 @@
 execute 'Download and install the public signing key' do
-  command 'wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -'
+  command 'wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch' \
+    '| sudo apt-key add -'
 end
 
+# TODO: make this idempotent 
 execute 'Add the repository definition' do
-  command "echo 'deb http://packages.elastic.co/logstashforwarder/debian stable main' | sudo tee /etc/apt/sources.list.d/logstashforwarder.list"
+  command "echo 'deb http://packages.elastic.co/logstashforwarder/debian stable main'" \
+    "| sudo tee /etc/apt/sources.list.d/logstashforwarder.list"
 end
 
 execute 'apt-get update'
@@ -18,8 +21,9 @@ directory '/etc/pki/tls/certs' do
 end
 
 cookbook_file '/etc/pki/tls/certs/logstash-forwarder.crt' do
-  source 'tls/certs/logstash-forwarder.crt'
   action :create
+  source 'tls/certs/logstash-forwarder.crt'
+  notifies :restart, 'service[logstash-forwarder]', :delayed
 end
 
 template '/etc/logstash-forwarder.conf' do

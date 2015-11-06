@@ -26,20 +26,17 @@ execute 'apt-get update'
 
 package 'logstash' do
   action :install
-  version '1:2.0.0-1'
-end
-
-service 'logstash' do
-  supports :status => true, :restart => true, :reload => true
-  action [:enable, :start]
+  version node['logstash']['version']
 end
 
 cookbook_file '/etc/pki/tls/certs/logstash-forwarder.crt' do
   source 'tls/certs/logstash-forwarder.crt'
+  notifies :restart, 'service[logstash]', :delayed
 end
 
 cookbook_file '/etc/pki/tls/private/logstash-forwarder.key' do
   source 'tls/private/logstash-forwarder.key'
+  notifies :restart, 'service[logstash]', :delayed
 end
 
 template '/etc/logstash/conf.d/01-lumberjack-input.conf' do
@@ -55,4 +52,9 @@ end
 template '/etc/logstash/conf.d/30-lumberjack-output.conf' do
   source 'conf/30-lumberjack-output.conf.erb'
   notifies :restart, 'service[logstash]', :delayed
+end
+
+service 'logstash' do
+  supports :status => true, :restart => true, :reload => true
+  action [:enable, :start]
 end

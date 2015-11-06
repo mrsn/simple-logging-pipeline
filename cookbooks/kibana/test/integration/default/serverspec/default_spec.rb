@@ -22,7 +22,7 @@ describe file('/var/log/kibana') do
     expect(subject).to be_directory
   end
 
-  it 'has the right owner' do
+  it 'has the right ownership' do
     expect(subject).to be_owned_by kibana_owner
   end
 
@@ -36,12 +36,12 @@ describe file("/opt/kibana-#{version}") do
     expect(subject).to be_directory
   end
 
-  it 'has the right owner' do
+  it 'has the right ownership' do
   	expect(subject).to be_owned_by kibana_owner
   end
 
   it 'has the right permissions' do
-    expect(subject).to be_mode 644
+    expect(subject).to be_mode 755
   end
 end
 
@@ -54,7 +54,7 @@ end
 %w(
   /etc/init.d/kibana
   /etc/default/kibana
-).each |f| do
+).each do |f|
   describe file(f) do
     it 'is a file' do
       expect(subject).to be_file
@@ -64,11 +64,16 @@ end
       expect(subject).to be_mode 755
     end
 
-    it 'has the right owner and group' do
+    it 'has the right ownership' do
       expect(subject).to be_owned_by 'root'
       expect(subject).to be_grouped_into 'root'
     end
   end
+end
+
+describe file('/etc/default/kibana') do
+  its(:content) { should match /user=\"kibana\"/ }
+  its(:content) { should match /group=\"kibana\"/ }
 end
 
 describe 'service kibana' do

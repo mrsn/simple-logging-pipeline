@@ -17,6 +17,7 @@
 
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
 export PATH
+export BABEL_CACHE_PATH=/opt/kibana/bin/kibana
 
 name=kibana
 program=/opt/kibana/bin/kibana
@@ -36,16 +37,6 @@ emit() {
 }
 
 start() {
-
-  # Ensure the log directory is setup correctly.
-  [ ! -d "/var/log/kibana/" ] && mkdir "/var/log/kibana/"
-  chown "$user":"$group" "/var/log/kibana/"
-  chmod 755 "/var/log/kibana/"
-
-
-  # Setup any environmental stuff beforehand
-
-
   # Run the program!
 
   chroot --userspec "$user":"$group" "$chroot" sh -c "
