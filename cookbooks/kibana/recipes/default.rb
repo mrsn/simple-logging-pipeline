@@ -22,20 +22,19 @@ link '/opt/kibana' do
 end
 
 execute 'change ownership of the kibana directory' do
-  command "chown -R kibana:kibana /opt/kibana-4.2.0-linux-x64"
+  command "chown -R kibana:root /opt/kibana-4.2.0-linux-x64"
 end
 
 execute 'change permissions of the kibana directory' do
-  command "chmod -R 655 /opt/kibana-4.2.0-linux-x64"
+  command "chmod -R 755 /opt/kibana-4.2.0-linux-x64"
 end
 
 directory '/var/log/kibana' do
   owner 'kibana'
-  group 'kibana'
+  group 'root'
   mode '0755'
   action :create
 end
-
 
 template '/etc/init.d/kibana' do
   source 'kibana.erb'

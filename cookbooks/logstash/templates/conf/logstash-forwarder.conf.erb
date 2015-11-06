@@ -1,0 +1,20 @@
+{
+  "network": {
+    "servers": [
+      "192.168.33.50:5043"
+    ],
+    "ssl ca": "/etc/pki/tls/certs/logstash-forwarder.crt",
+    "timeout": 15
+  },
+  "files": [
+    {
+      "paths": [
+        "/var/log/syslog",
+        "/var/log/auth.log"
+      ],
+      "fields": {
+        "type": "syslog"
+      }
+    }
+  ]
+}
