@@ -2,7 +2,6 @@ require 'spec_helper'
 
 version = '4.2.0-linux-x64'
 kibana_owner = 'kibana'
-kibana_group = 'kibana'
 
 describe user('kibana') do
   it { should exist }
@@ -23,9 +22,8 @@ describe file('/var/log/kibana') do
     expect(subject).to be_directory
   end
 
-  it 'has the right owner and group' do
+  it 'has the right owner' do
     expect(subject).to be_owned_by kibana_owner
-    expect(subject).to be_grouped_into kibana_group
   end
 
   it 'has the right permissions' do
@@ -38,9 +36,8 @@ describe file("/opt/kibana-#{version}") do
     expect(subject).to be_directory
   end
 
-  it 'has the right owner and group' do
+  it 'has the right owner' do
   	expect(subject).to be_owned_by kibana_owner
-  	expect(subject).to be_grouped_into kibana_group
   end
 
   it 'has the right permissions' do
@@ -54,17 +51,26 @@ describe file('/opt/kibana') do
   end
 end
 
-describe file('/etc/init.d/kibana') do
-  it 'is a file' do
-    expect(subject).to be_file
-  end
+%w(
+  /etc/init.d/kibana
+  /etc/default/kibana
+).each |f| do
+  describe file(f) do
+    it 'is a file' do
+      expect(subject).to be_file
+    end
   
-  it 'has the right permission' do
-    expect(subject).to be_mode 755
-  end
+    it 'has the right permission' do
+      expect(subject).to be_mode 755
+    end
 
-  it 'has the right owner and group' do
-  	expect(subject).to be_owned_by 'root'
-  	expect(subject).to be_grouped_into 'root'
+    it 'has the right owner and group' do
+      expect(subject).to be_owned_by 'root'
+      expect(subject).to be_grouped_into 'root'
+    end
   end
+end
+
+describe 'service kibana' do
+  it { expect(service('kibana')).to be_running }
 end
