@@ -1,7 +1,4 @@
-user 'kibana' do
-  system true
-  shell '/bin/false'
-end
+user 'kibana'
 
 group 'kibana' do
   action :create
@@ -20,19 +17,36 @@ execute 'extract kibana' do
   not_if { ::File.exists?('/opt/kibana-4.2.0-linux-x64') }
 end
 
+link '/opt/kibana' do
+  to '/opt/kibana-4.2.0-linux-x64'
+end
+
 execute 'change ownership of the kibana directory' do
   command "chown -R kibana:kibana /opt/kibana-4.2.0-linux-x64"
 end
 
 execute 'change permissions of the kibana directory' do
-  command "chmod -R 644 /opt/kibana-4.2.0-linux-x64"
+  command "chmod -R 655 /opt/kibana-4.2.0-linux-x64"
 end
 
-link '/opt/kibana' do
-  to '/opt/kibana-4.2.0-linux-x64'
+directory '/var/log/kibana' do
+  owner 'kibana'
+  group 'kibana'
+  mode '0755'
+  action :create
 end
+
 
 template '/etc/init.d/kibana' do
   source 'kibana.erb'
   mode '0755'
+end
+
+template '/etc/default/kibana' do
+  source 'default.erb'
+  mode '0755'
+end
+
+service 'kibana' do
+  action [ :enable, :start ]
 end

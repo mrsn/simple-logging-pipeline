@@ -41,9 +41,6 @@ describe file('/etc/elasticsearch/elasticsearch.yml') do
   end
 end
 
-describe 'ulimts are correct' do
-end
-
 describe 'service elasticsearch' do
   it { expect(service('elasticsearch')).to be_running }
 end

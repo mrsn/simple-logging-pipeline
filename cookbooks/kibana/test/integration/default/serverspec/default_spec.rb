@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 version = '4.2.0-linux-x64'
+kibana_owner = 'kibana'
+kibana_group = 'kibana'
 
 describe user('kibana') do
   it { should exist }
@@ -16,14 +18,29 @@ describe file("/tmp/kibana-#{version}.tar.gz") do
   end
 end
 
+describe file('/var/log/kibana') do
+  it 'is a directory' do
+    expect(subject).to be_directory
+  end
+
+  it 'has the right owner and group' do
+    expect(subject).to be_owned_by kibana_owner
+    expect(subject).to be_grouped_into kibana_group
+  end
+
+  it 'has the right permissions' do
+    expect(subject).to be_mode 755
+  end
+end
+
 describe file("/opt/kibana-#{version}") do
   it 'is a directory' do
     expect(subject).to be_directory
   end
 
   it 'has the right owner and group' do
-  	expect(subject).to be_owned_by 'kibana'
-  	expect(subject).to be_grouped_into 'kibana'
+  	expect(subject).to be_owned_by kibana_owner
+  	expect(subject).to be_grouped_into kibana_group
   end
 
   it 'has the right permissions' do

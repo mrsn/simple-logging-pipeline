@@ -17,7 +17,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     es.vm.provision :chef_solo do |chef|
       chef.cookbooks_path = "cookbooks"
+      chef.add_recipe "base"
       chef.add_recipe "es"
+      chef.add_recipe "kibana"
     end
   end
 
@@ -33,6 +35,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     logstash.vm.provision :chef_solo do |chef|
       chef.cookbooks_path = "cookbooks"
+      chef.add_recipe "base"
       chef.add_recipe "logstash"
     #  chef.data_bags_path = "../../data_bags"
     end
