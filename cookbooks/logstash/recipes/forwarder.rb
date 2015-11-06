@@ -24,7 +24,7 @@ end
 
 template '/etc/logstash-forwarder.conf' do
   source 'conf/logstash-forwarder.conf.erb'
-  notifies :restart, 'service[logstash-forwarder]'
+  notifies :restart, 'service[logstash-forwarder]', :delayed
 end
 
 service 'logstash-forwarder' do

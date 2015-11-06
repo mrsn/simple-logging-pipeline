@@ -44,20 +44,15 @@ end
 
 template '/etc/logstash/conf.d/01-lumberjack-input.conf' do
   source 'conf/01-lumberjack-input.conf.erb'
-  notifies :restart, 'service[logstash]'
+  notifies :restart, 'service[logstash]', :delayed
 end
 
 template '/etc/logstash/conf.d/10-syslog.conf' do
   source 'conf/10-syslog.conf.erb'
-  notifies :restart, 'service[logstash]'
+  notifies :restart, 'service[logstash]', :delayed
 end
 
 template '/etc/logstash/conf.d/30-lumberjack-output.conf' do
   source 'conf/30-lumberjack-output.conf.erb'
-  notifies :restart, 'service[logstash]'
+  notifies :restart, 'service[logstash]', :delayed
 end
-
-#template '/etc/logstash/conf.d/logstash-simple.conf' do
-#  source 'conf/logstash-simple.erb'
-#  notifies :restart, 'service[logstash]', :immediately
-#end
