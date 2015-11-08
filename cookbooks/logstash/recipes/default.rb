@@ -29,15 +29,29 @@ package 'logstash' do
   version node['logstash']['version']
 end
 
-cookbook_file '/etc/pki/tls/certs/logstash-forwarder.crt' do
-  source 'tls/certs/logstash-forwarder.crt'
+# of cource these will be encrypted, when using chef-server
+pk = data_bag_item('logstash', 'private_key')
+cert = data_bag_item('logstash', 'certificate')
+
+file('/etc/pki/tls/certs/logstash-forwarder.crt') do
+  content cert
   notifies :restart, 'service[logstash]', :delayed
 end
 
-cookbook_file '/etc/pki/tls/private/logstash-forwarder.key' do
-  source 'tls/private/logstash-forwarder.key'
+file('/etc/pki/tls/private/logstash-forwarder.key') do
+  content pk
   notifies :restart, 'service[logstash]', :delayed
 end
+
+#cookbook_file '/etc/pki/tls/certs/logstash-forwarder.crt' do
+#  source 'tls/certs/logstash-forwarder.crt'
+#  notifies :restart, 'service[logstash]', :delayed
+#end
+
+#cookbook_file '/etc/pki/tls/private/logstash-forwarder.key' do
+#  source 'tls/private/logstash-forwarder.key'
+#  notifies :restart, 'service[logstash]', :delayed
+#end
 
 template '/etc/logstash/conf.d/01-lumberjack-input.conf' do
   source 'conf/01-lumberjack-input.conf.erb'
