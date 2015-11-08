@@ -67,8 +67,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     shipper.vm.provision "shell", inline: $script
 
     shipper.vm.provision :chef_solo do |chef|
-      #chef.add_recipe 'apache2::default'
       chef.add_recipe 'logstash::forwarder'
+      chef.add_recipe 'apache2::default'
       chef.data_bags_path = 'data_bags'
     end
   end

@@ -41,16 +41,6 @@ file('/etc/pki/tls/private/logstash-forwarder.key') do
   notifies :restart, 'service[logstash]', :delayed
 end
 
-#cookbook_file '/etc/pki/tls/certs/logstash-forwarder.crt' do
-#  source 'tls/certs/logstash-forwarder.crt'
-#  notifies :restart, 'service[logstash]', :delayed
-#end
-
-#cookbook_file '/etc/pki/tls/private/logstash-forwarder.key' do
-#  source 'tls/private/logstash-forwarder.key'
-#  notifies :restart, 'service[logstash]', :delayed
-#end
-
 template '/etc/logstash/conf.d/01-lumberjack-input.conf' do
   source 'conf/01-lumberjack-input.conf.erb'
   notifies :restart, 'service[logstash]', :delayed
