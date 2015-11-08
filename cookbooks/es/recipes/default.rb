@@ -30,7 +30,8 @@ template '/etc/elasticsearch/elasticsearch.yml' do
   group 'elasticsearch'
   mode 0640
   variables(
-    cluster_name: node['es']['cluster_name']
+    cluster_name: node['es']['cluster_name'],
+    bind_address: node['es']['bind_address']
   )
   notifies :restart, 'service[elasticsearch]', :immediately 
 end

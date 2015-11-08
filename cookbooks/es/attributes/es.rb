@@ -18,4 +18,7 @@ default['es']['gc_settings'] =
 -XX:+UseCMSInitiatingOccupancyOnly
 -XX:+HeapDumpOnOutOfMemoryError"
 default['es']['heap_size'] = "#{(node.memory.total.to_i * 0.6).floor / 1024}m"
+
+default['es']['bind_address'] = '192.168.33.51'
+
 default['es']['jmx'] = false
