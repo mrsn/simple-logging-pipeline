@@ -31,7 +31,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
 
     es.vm.provision :chef_solo do |chef|
-      chef.cookbooks_path = 'cookbooks'
       chef.add_recipe 'es'
       chef.add_recipe 'kibana'
     end
@@ -48,9 +47,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
 
     logstash.vm.provision :chef_solo do |chef|
-      chef.cookbooks_path = 'cookbooks'
       chef.add_recipe 'logstash'
-      chef.data_bags_path = "data_bags"
+      chef.data_bags_path = 'data_bags'
     end
   end
 
@@ -65,9 +63,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
 
     shipper.vm.provision :chef_solo do |chef|
-      chef.cookbooks_path = 'cookbooks'
+      chef.add_recipe 'apache2::default'
       chef.add_recipe 'logstash::forwarder'
-      chef.data_bags_path = "data_bags"
+      chef.data_bags_path = 'data_bags'
     end
   end
 end
