@@ -62,6 +62,17 @@ template '/etc/default/kibana' do
   )
 end
 
+template "#{kibana_home}/config/kibana.yml" do
+  source 'kibana.yml.erb'
+  owner kibana_owner
+  group kibana_group
+  mode '0755'
+  variables(
+    elasticsearch_url: node['kibana']['elasticsearch_url']
+  )
+  notifies :restart, 'service[elasticsearch]', :delayed
+end
+
 service 'kibana' do
   action [ :enable, :start ]
 end

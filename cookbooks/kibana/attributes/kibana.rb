@@ -7,3 +7,4 @@ default['kibana']['download_url'] =
   "kibana-#{node['kibana']['version']}.tar.gz"
 
 default['kibana']['install_dir'] = "/opt"
+default['kibana']['elasticsearch_url'] = 'http://192.168.33.51:9200'
