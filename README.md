@@ -8,7 +8,7 @@
 
 Shipper (syslog, httpd, lumberjack) -> Logstash -> Elasticsearch -> Kibana
   
-  In Vagrant there are three different VMs for these components:
+In Vagrant there are three different VMs for these components:
 
   * es (elasticsearch + kibana)
   * logstash
@@ -24,4 +24,14 @@ For the deployment I've used Chef together with Test-Kitchen and Serverspec for 
 
 ## Testing
 
-  you can run 'chef exec kitchen test' in every cookbook to test it 
+  you can run 'chef exec kitchen test' in every cookbook to test it
+
+## TODOs
+
+* Use Redis or RabbitMQ as a broker between the Logstash-Agent (lumberjack in my case)and the central logstash
+
+* Add proper mappings to Elasticsearch
+
+* Add more nodes to the Elasticseach-Cluster
+
+* Modify the Apache logs to avoid a lot of filtering
