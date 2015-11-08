@@ -29,17 +29,15 @@ package 'logstash' do
   version node['logstash']['version']
 end
 
-# of cource these will be encrypted, when using chef-server
-pk = data_bag_item('logstash', 'private_key')
-cert = data_bag_item('logstash', 'certificate')
+credentials = data_bag_item('logstash', 'credentials')
 
 file('/etc/pki/tls/certs/logstash-forwarder.crt') do
-  content cert
+  content credentials['certificate']
   notifies :restart, 'service[logstash]', :delayed
 end
 
 file('/etc/pki/tls/private/logstash-forwarder.key') do
-  content pk
+  content credentials['private_key']
   notifies :restart, 'service[logstash]', :delayed
 end
 

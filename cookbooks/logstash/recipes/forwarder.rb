@@ -20,18 +20,12 @@ directory '/etc/pki/tls/certs' do
   recursive true
 end
 
-cert = data_bag_item('logstash', 'certificate')
+credentials = data_bag_item('logstash', 'credentials')
 
 file('/etc/pki/tls/certs/logstash-forwarder.crt') do
-  content cert
+  content credentials['certificate']
   notifies :restart, 'service[logstash-forwarder]', :delayed
 end
-
-#cookbook_file '/etc/pki/tls/certs/logstash-forwarder.crt' do
-#  action :create
-#  source 'tls/certs/logstash-forwarder.crt'
-#  notifies :restart, 'service[logstash-forwarder]', :delayed
-#end
 
 template '/etc/logstash-forwarder.conf' do
   source 'conf/logstash-forwarder.conf.erb'

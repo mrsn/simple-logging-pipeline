@@ -12,15 +12,13 @@ omnibus_chef_version = '12.5.1'
 
 $script = <<SCRIPT
 
-sed -i 's@http://us.@http://@g' /etc/apt/sources.list
+sed -i 's@http://us.@http://de.@g' /etc/apt/sources.list
 
 SCRIPT
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-    config.vm.provision "shell", inline: $script
-
-    config.vm.define 'es' do |es|
+  config.vm.define 'es' do |es|
     es.vm.box = box_name
     es.vm.box_url = box_url
     es.omnibus.chef_version = omnibus_chef_version
@@ -29,6 +27,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     es.vm.provider :virtualbox do |vb|
       vb.customize ['modifyvm', :id, '--memory', '1024', '--cpus', '2']
     end
+
+    es.vm.provision "shell", inline: $script
 
     es.vm.provision :chef_solo do |chef|
       chef.add_recipe 'es'
@@ -46,6 +46,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       vb.customize ['modifyvm', :id, '--memory', '512']
     end
 
+    logstash.vm.provision "shell", inline: $script
+
     logstash.vm.provision :chef_solo do |chef|
       chef.add_recipe 'logstash'
       chef.data_bags_path = 'data_bags'
@@ -62,8 +64,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       vb.customize ['modifyvm', :id, '--memory', '512']
     end
 
+    shipper.vm.provision "shell", inline: $script
+
     shipper.vm.provision :chef_solo do |chef|
-      chef.add_recipe 'apache2::default'
+      #chef.add_recipe 'apache2::default'
       chef.add_recipe 'logstash::forwarder'
       chef.data_bags_path = 'data_bags'
     end
