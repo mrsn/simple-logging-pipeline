@@ -14,6 +14,7 @@
   * logstash
   * shipper (lumberjack + httpd + syslog)
 
+
   For the deployment I've used Chef together with Test-Kitchen and Serverspec for the tests.
 
 ## How to start
