@@ -24,7 +24,7 @@ For the deployment I've used Chef together with Test-Kitchen and Serverspec for 
 
 ## Testing
 
-  you can run 'chef exec kitchen test' in every cookbook to test it
+  You can run 'chef exec kitchen test' in every cookbook to test it
 
 ## TODOs
 
