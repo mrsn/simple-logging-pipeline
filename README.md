@@ -28,7 +28,7 @@ For the deployment I've used Chef together with Test-Kitchen and Serverspec for 
 
 ## TODOs
 
-* Use Redis or RabbitMQ as a broker between the Logstash-Agent (lumberjack in my case)and the central logstash
+* Use Redis or RabbitMQ as a broker between the Logstash-Agent (lumberjack in my case) and the central logstash
 
 * Add proper mappings to Elasticsearch
 
