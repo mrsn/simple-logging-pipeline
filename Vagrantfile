@@ -10,7 +10,15 @@ box_url = 'http://opscode-vm-bento.s3.amazonaws.com/' \
 
 omnibus_chef_version = '12.5.1'
 
+$script = <<SCRIPT
+
+sed -i 's@http://us.@http://@g' /etc/apt/sources.list
+
+SCRIPT
+
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+    config.vm.provision "shell", inline: $script
 
     config.vm.define 'es' do |es|
     es.vm.box = box_name
