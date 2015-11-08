@@ -34,4 +34,4 @@ For the deployment I've used Chef together with Test-Kitchen and Serverspec for 
 
 * Add more nodes to the Elasticseach-Cluster
 
-* Modify the Apache logs to avoid a lot of filtering
+* Modify the Apache logs to avoid a lot of filtering on cental logstash
