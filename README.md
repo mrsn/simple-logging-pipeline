@@ -6,7 +6,7 @@
 
 ## Pipeline Idea
 
-Shipper(syslog, httpd, lumberjack) -> Logstash -> Elasticsearch -> Kibana
+Shipper (syslog, httpd, lumberjack) -> Logstash -> Elasticsearch -> Kibana
   
   In Vagrant there are three different VMs for these components:
 
