@@ -1,8 +1,8 @@
 # simple-logging-pipeline
 
 ## Requirements
-  chef-dk >= 0.9.1 (optional requirement)
-  vagrant >= 1.5.4    
+ * chef-dk >= 0.9.1 (optional requirement)
+ * vagrant >= 1.5.4    
 
 ## Pipeline Idea
 
