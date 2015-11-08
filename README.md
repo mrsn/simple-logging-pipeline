@@ -28,10 +28,10 @@ For the deployment I've used Chef together with Test-Kitchen and Serverspec for 
 
 ## TODOs
 
-* Use Redis or RabbitMQ as a broker between the Logstash-Agent (lumberjack in my case) and the central logstash
+* Use Redis or RabbitMQ as a broker between the Logstash-Agent (lumberjack in my case) and the central Logstash
 
 * Add proper mappings to Elasticsearch
 
 * Add more nodes to the Elasticseach-Cluster
 
-* Modify the Apache logs to avoid a lot of filtering on the cental logstash
+* Modify the Apache logs to avoid a lot of filtering on the cental Logstash
