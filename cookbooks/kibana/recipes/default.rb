@@ -70,7 +70,7 @@ template "#{kibana_home}/config/kibana.yml" do
   variables(
     elasticsearch_url: node['kibana']['elasticsearch_url']
   )
-  notifies :restart, 'service[elasticsearch]', :delayed
+  notifies :restart, 'service[kibana]', :delayed
 end
 
 service 'kibana' do
