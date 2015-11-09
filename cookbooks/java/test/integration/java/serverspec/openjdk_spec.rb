@@ -3,7 +3,6 @@ require 'serverspec'
 set :backend, :exec
 
 %w(
-  python-software-properties
   openjdk-7-jdk
 ).each do |package_name|
   describe package_name do
