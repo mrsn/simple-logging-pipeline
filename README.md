@@ -16,7 +16,8 @@ In Vagrant there are three different VMs for these components:
   * logstash
   * shipper (lumberjack + httpd + syslog)
 
-For the deployment Chef is used together with Test-Kitchen and Serverspec for the tests.
+## Deployment
+  For the deployment Chef is used together with Test-Kitchen and Serverspec for the tests.
 
 ## How to start
 
