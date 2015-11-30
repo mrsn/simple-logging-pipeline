@@ -36,7 +36,7 @@ In Vagrant there are three different VMs for these components:
 
 ## TODOs (Scaling up/out)
 
-* Use Redis or RabbitMQ as a broker between the Logstash-Agent (lumberjack in my case) and the central Logstash
+* Use Redis or RabbitMQ as a broker between the Logstash-Agent (lumberjack in this example) and the central Logstash
 
 * Add proper mappings to Elasticsearch
 
