@@ -27,7 +27,7 @@ For the deployment I've used Chef together with Test-Kitchen and Serverspec for 
 
   You can run 'chef exec kitchen test' in every cookbook to test it
 
-## TODOs (Scale-out)
+## TODOs (Scaling up/out)
 
 * Use Redis or RabbitMQ as a broker between the Logstash-Agent (lumberjack in my case) and the central Logstash
 
