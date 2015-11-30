@@ -1,6 +1,6 @@
 # simple-logging-pipeline
 
-  This is a small example how to deploy create a small logging pipeline with Elasticsearch, Logstash and Kibana. 
+  This is a small example how to create and deploy a small logging pipeline with Elasticsearch, Logstash and Kibana. 
 
 ## Requirements
  * chef-dk >= 0.9.1 (optional requirement)
