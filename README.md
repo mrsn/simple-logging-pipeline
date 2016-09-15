@@ -32,7 +32,7 @@ In Vagrant there are three different VMs for these components:
 
 ## Security
 
-  Note that this is only an example. Credentials in the data_bags are only creating for this example. Don't use them in production, they are anyway only valid for 192.168.33.50 !  
+  Note that this is only an example. Credentials in the data_bags are only created for this example. Don't use them in production, they are anyway only valid for 192.168.33.50 !  
 
 ## TODOs (Scaling up/out)
 
